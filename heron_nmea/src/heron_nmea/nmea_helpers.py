@@ -8,6 +8,7 @@ from datetime import datetime
 from collections import namedtuple
 
 import re, operator
+from functools import reduce
 
 
 def checksum(sentence):
