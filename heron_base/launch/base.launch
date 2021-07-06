@@ -22,9 +22,11 @@
       </node>
     </group>
 
+<!--
     <group unless="$(optenv USE_SNMP_CHECK_NODE true)">
         <node ns="wireless" pkg="wireless_watcher" name="wireless_watcher" type="watcher_node" respawn="true" />
     </group>
+-->
 
     <group if="$(eval arg('namespace') == '')">
      <node pkg="um7" type="um7_driver" name="um7_driver" output="screen">
@@ -34,6 +36,7 @@
        <param name="lt_model" value="true" />
        <param name="linear_acceleration_stdev" value="0.38" />
        <param name="frame_id" value="imu_link" />
+       <param name="use_magnetic_field_msg" value="true" />
      </node>
     </group>
 
@@ -45,12 +48,13 @@
        <param name="lt_model" value="true" />
        <param name="linear_acceleration_stdev" value="0.38" />
        <param name="frame_id" value="$(arg namespace)/imu_link" />
+       <param name="use_magnetic_field_msg" value="true" />
      </node>
     </group>
 
     <node pkg="imu_filter_madgwick" type="imu_filter_node" name="imu_filter_madgwick">
       <rosparam file="$(env HERON_MAG_CONFIG)" />
-      <param name="~use_magnetic_field_msg" value="false" />
+      <param name="~use_magnetic_field_msg" value="true" />
       <param name="world_frame" value="enu" />
       <param name="publish_tf" value="false" />
       <param name="publish_debug_topics" value="true" />
